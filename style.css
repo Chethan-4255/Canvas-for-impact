@@ -3,9 +3,9 @@
     --primary-color: #0a192f;
     --secondary-color: #112240;
     --accent-color: #64ffda;
-    --bg-light: #020c1b;
+    --bg-light: #0a192f;
     --bg-medium: #0a192f;
-    --bg-dark: #020c1b;
+    --bg-dark: #0a192f;
     --bg-darker: #010a16;
     --text-light: #e6f1ff;
     --text-dark: #ccd6f6;
@@ -50,6 +50,7 @@ html {
     scroll-behavior: smooth;
     -webkit-font-smoothing: antialiased;
     -moz-osx-font-smoothing: grayscale;
+    overflow-x: hidden;
 }
 
 body {
@@ -301,13 +302,32 @@ p {
     cursor: pointer;
     background: var(--accent-color);
     color: var(--bg-dark);
-    box-shadow: 0 4px 15px rgba(100, 255, 218, 0.3);
+    box-shadow: 0 2px 8px rgba(100, 255, 218, 0.2);
+}
+
+.cta-button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.2) 50%, 
+        transparent 100%);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.cta-button:hover::after {
+    transform: translateX(100%);
 }
 
 .cta-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 25px rgba(100, 255, 218, 0.4);
-    background: var(--accent-color);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(100, 255, 218, 0.15);
+    background-color: white;
     color: var(--bg-dark);
 }
 
@@ -319,10 +339,10 @@ p {
 }
 
 .cta-button.secondary:hover {
-    background: rgba(100, 255, 218, 0.1);
+    background: rgba(100, 255, 218, 0.05);
     border-color: var(--accent-color);
     color: var(--accent-color);
-    box-shadow: 0 4px 15px rgba(100, 255, 218, 0.2);
+    box-shadow: 0 2px 8px rgba(100, 255, 218, 0.1);
 }
 
 /* Enhanced Method Cards */
@@ -590,7 +610,7 @@ p {
         left: 0;
         width: 100%;
         height: 100vh;
-        background: var(--bg-medium);
+        background: var(--bg-dark);
         flex-direction: column;
         justify-content: center;
         align-items: center;
@@ -953,10 +973,13 @@ a:hover {
 
 [data-aos="fade-up"] {
     transform: translateY(30px);
+    opacity: 0;
+    transition: transform 0.6s ease-out, opacity 0.6s ease-out;
 }
 
 [data-aos="fade-up"].aos-animate {
     transform: translateY(0);
+    opacity: 1;
 }
 
 [data-aos="fade-down"] {
@@ -986,6 +1009,22 @@ a:hover {
     height: 24px;
     position: relative;
     z-index: 1001;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+    appearance: none;
+    outline: none;
+}
+
+/* Reset for menu toggle to prevent browser-specific styling */
+.menu-toggle, 
+.menu-toggle span,
+.menu-toggle span:before,
+.menu-toggle span:after {
+    border-radius: 0 !important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    box-shadow: none !important;
+    background-clip: padding-box;
 }
 
 .menu-toggle span {
@@ -1015,15 +1054,29 @@ a:hover {
 .menu-toggle.active span:first-child {
     transform: rotate(45deg);
     top: 50%;
+    margin-top: 0;
+    border-radius: 0 !important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    outline: none;
 }
 
 .menu-toggle.active span:nth-child(2) {
     opacity: 0;
+    border-radius: 0 !important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    outline: none;
 }
 
 .menu-toggle.active span:last-child {
     transform: rotate(-45deg);
     bottom: 50%;
+    margin-bottom: 0;
+    border-radius: 0 !important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    outline: none;
 }
 
 /* Mobile Menu Styles */
@@ -1039,13 +1092,11 @@ a:hover {
         left: 0;
         width: 100%;
         height: 100vh;
-        background: var(--bg-medium);
+        background: var(--bg-dark);
         flex-direction: column;
         justify-content: center;
         align-items: center;
-        gap: 2rem;
-        padding: 2rem;
-        margin: 0;
+        gap: 1rem;
     }
 
     .nav-links.active {
@@ -1356,7 +1407,7 @@ section h2::after {
 .search-box input:focus {
     outline: none;
     border-color: var(--accent-color);
-    box-shadow: 0 0 0 2px rgba(100, 255, 218, 0.1);
+    box-shadow: 0 0 0 2px rgba(100,255,218,0.1);
 }
 
 .search-box i {
@@ -1640,3974 +1691,923 @@ section h2::after {
     }
 }
 
-/* New styles for blog post content */
-.blog-post-content {
-    /* Add your styles here */
-}
-
-.blog-post-content p {
-    /* Add your styles here */
-}
-
-.blog-post-content img {
-    /* Add your styles here */
-}
-
-.blog-post-content a {
-    /* Add your styles here */
-}
-
-.blog-post-content h2 {
-    /* Add your styles here */
-}
-
-.blog-post-content h3 {
-    /* Add your styles here */
-}
-
-.blog-post-content ul {
-    /* Add your styles here */
-}
-
-.blog-post-content ol {
-    /* Add your styles here */
-}
-
-.blog-post-content blockquote {
-    /* Add your styles here */
-}
-
-.blog-post-content code {
-    /* Add your styles here */
-}
-
-.blog-post-content pre {
-    /* Add your styles here */
-}
-
-.blog-post-content table {
-    /* Add your styles here */
-}
-
-.blog-post-content th {
-    /* Add your styles here */
-}
-
-.blog-post-content td {
-    /* Add your styles here */
-}
-
-.blog-post-content hr {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-container {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
+/* --- TYPEFORM OVERRIDES FOR JOIN US PAGE --- */
+/* Container and Form Layout */
+.form-container {
+    background-color: var(--bg-medium);
+    border-radius: var(--radius-lg);
+    box-shadow: var(--shadow-lg);
+    width: 100%;
+    max-width: 800px;
+    min-height: 600px;
+    display: flex;
+    flex-direction: column;
+    overflow: hidden;
+    margin: 2rem auto;
+    position: relative;
+    transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-font-smoothing: antialiased;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.form-header {
+    padding: 2rem;
+    border-bottom: 1px solid var(--accent-color);
+    background: var(--bg-medium);
+    position: sticky;
+    top: 0;
+    z-index: 10;
+}
+
+.form-header .logo {
+    font-size: 2rem;
+    font-weight: 700;
+    color: var(--accent-color);
+    margin-bottom: 1rem;
+    transition: all 0.3s ease;
+}
+
+.progress-container {
+    width: 100%;
+    height: 4px;
+    background-color: var(--bg-dark);
+    border-radius: 2px;
+    overflow: hidden;
+    position: relative;
+}
+
+.progress-bar {
+    height: 100%;
+    width: 0;
+    background-color: var(--accent-color);
+    transition: width 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    position: relative;
+    overflow: hidden;
+}
+
+.progress-bar::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, 
+        rgba(255,255,255,0) 0%,
+        rgba(255,255,255,0.2) 50%,
+        rgba(255,255,255,0) 100%);
+    animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+    0% { transform: translateX(-100%); }
+    100% { transform: translateX(100%); }
+}
+
+.form-content {
+    flex: 1;
+    padding: 1rem;
+    overflow-y: auto;
+    position: relative;
+    -webkit-overflow-scrolling: touch;
+    scroll-behavior: smooth;
+}
+
+.question-screen, .intro-screen, .thank-you-screen {
+    opacity: 0;
+    visibility: hidden;
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    padding: 1.5rem;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    transition: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+    background: var(--bg-medium);
+    transform: translateY(20px);
+    will-change: transform, opacity;
+    padding-top: 1.5rem;
+}
 
-.blog-post-content .image-link {
-    /* Add your styles here */
+.question-screen.active, .intro-screen.active, .thank-you-screen.active {
+    opacity: 1;
+    visibility: visible;
+    position: relative;
+    transform: translateY(0);
+}
+
+.form-group {
+    margin-bottom: 2rem;
+    opacity: 0;
+    transform: translateY(10px);
+    animation: fadeInUp 0.5s forwards;
+    animation-delay: calc(var(--group-index, 0) * 0.1s);
+}
+
+@keyframes fadeInUp {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+label {
+    display: block;
+    font-size: 1.1rem;
+    font-weight: 500;
+    margin-bottom: 0.75rem;
+    color: var(--text-light);
+    transition: color 0.3s ease;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="tel"],
+input[type="number"],
+textarea,
+select {
+    width: 100%;
+    padding: 1rem 1.25rem;
+    border: 2px solid var(--accent-color);
+    border-radius: var(--radius-md);
+    font-size: 1rem;
+    background-color: var(--bg-dark);
+    color: var(--text-light);
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    -webkit-appearance: none;
+    appearance: none;
+    box-shadow: 0 0 10px rgba(100,255,218,0.2);
+}
+
+input[type="text"]:focus,
+input[type="email"]:focus,
+input[type="tel"]:focus,
+input[type="number"]:focus,
+textarea:focus,
+select:focus {
+    border-color: var(--accent-color);
+    outline: none;
+    box-shadow: 0 0 0 3px rgba(100,255,218,0.15);
+    transform: translateY(-1px);
+}
+
+.radio-group, .checkbox-group {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+}
+
+.radio-option, .checkbox-option {
+    display: flex;
+    align-items: center;
+    padding: 1.25rem;
+    border: 2px solid var(--accent-color);
+    border-radius: var(--radius-md);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    background: var(--bg-dark);
+    color: var(--text-light);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 10px rgba(100,255,218,0.2);
+}
+
+.radio-option:hover, .checkbox-option:hover {
+    border-color: rgba(100,255,218,0.5);
+    transform: translateY(-1px);
+}
+
+.radio-option.selected, .checkbox-option.selected {
+    border-color: var(--accent-color);
+    background: var(--bg-darker);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(100,255,218,0.1);
+}
+
+.radio-option input[type="radio"], 
+.checkbox-option input[type="checkbox"] {
+    margin-right: 1rem;
+    width: 20px;
+    height: 20px;
+    accent-color: var(--accent-color);
+}
+
+.error-message {
+    color: var(--accent-color);
+    font-size: 0.95rem;
+    margin-top: 0.5rem;
+    animation: shake 0.5s cubic-bezier(0.36, 0.07, 0.19, 0.97) both;
+}
+
+@keyframes shake {
+    10%, 90% { transform: translateX(-1px); }
+    20%, 80% { transform: translateX(2px); }
+    30%, 50%, 70% { transform: translateX(-4px); }
+    40%, 60% { transform: translateX(4px); }
+}
+
+/* Buttons */
+.btn, .cta-button, button {
+    border-radius: var(--radius-full);
+    border: none;
+    padding: 0.875rem 1.75rem;
+    font-size: 1rem;
+    font-weight: 600;
+    font-family: inherit;
+    background-color: var(--accent-color);
+    color: var(--bg-dark);
+    cursor: pointer;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    margin: 0.5rem 0.25rem;
+    position: relative;
+    overflow: hidden;
+    transform: translateZ(0);
+    -webkit-font-smoothing: antialiased;
+}
+
+.btn::after, .cta-button::after, button::after {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, 
+        transparent 0%, 
+        rgba(255, 255, 255, 0.2) 50%, 
+        transparent 100%);
+    transform: translateX(-100%);
+    transition: transform 0.6s ease;
+}
+
+.btn:hover::after, .cta-button:hover::after, button:hover::after {
+    transform: translateX(100%);
+}
+
+.btn-primary, .cta-button {
+    background-color: var(--accent-color);
+    color: var(--bg-dark);
+    transition: all var(--transition-normal);
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(100, 255, 218, 0.15);
+}
+
+.btn-primary:hover, .cta-button:hover {
+    background-color: white;
+    color: var(--bg-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(100, 255, 218, 0.15);
+}
+
+.btn-secondary {
+    background: var(--bg-dark);
+    color: var(--accent-color);
+    border: 1px solid var(--accent-color);
+}
+
+.btn-secondary:hover {
+    background: var(--accent-color);
+    color: var(--bg-dark);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(100, 255, 218, 0.2);
+}
+
+/* Checkmark animation for thank you screen */
+.check-animation {
+    margin: 2rem auto;
+    width: 100px;
+    height: 100px;
+    transform: scale(0.8);
+    opacity: 0;
+    animation: scaleIn 0.5s forwards 0.5s;
+}
+
+@keyframes scaleIn {
+    to {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+.checkmark__circle {
+    stroke-dasharray: 166;
+    stroke-dashoffset: 166;
+    stroke-width: 2;
+    stroke-miterlimit: 10;
+    stroke: var(--accent-color);
+    fill: none;
+    animation: stroke 0.6s cubic-bezier(0.65, 0, 0.45, 1) forwards;
+}
+
+.checkmark {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    display: block;
+    stroke-width: 2;
+    stroke: var(--accent-color);
+    stroke-miterlimit: 10;
+    box-shadow: inset 0px 0px 0px var(--accent-color);
+    animation: fill .4s ease-in-out .4s forwards, scale .3s ease-in-out .9s both;
+}
+
+.checkmark__check {
+    transform-origin: 50% 50%;
+    stroke-dasharray: 48;
+    stroke-dashoffset: 48;
+    animation: stroke 0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s forwards;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .form-container {
+        margin: 1rem auto;
+        min-height: 500px;
+        border-radius: var(--radius-md);
+    }
+
+    .form-header {
+        padding: 1.5rem;
+    }
+
+    .form-header .logo {
+        font-size: 1.5rem;
+    }
+
+    .form-content {
+        padding: 1.5rem;
+    }
+
+    .question-screen, .intro-screen, .thank-you-screen {
+        padding: 1.5rem;
+    }
+
+    h1 {
+        font-size: 1.75rem;
+        margin-bottom: 1rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.5rem;
+    }
+
+    label {
+        font-size: 1rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    textarea,
+    select {
+        padding: 0.875rem 1rem;
+        font-size: 0.95rem;
+    }
+
+    .radio-option, .checkbox-option {
+        padding: 1rem;
+    }
+
+    .btn, .cta-button {
+        padding: 0.75rem 1.5rem;
+        font-size: 0.95rem;
+    }
+
+    .check-animation {
+        width: 80px;
+        height: 80px;
+    }
+}
+
+@media (max-width: 480px) {
+    .form-container {
+        margin: 0.5rem auto;
+        min-height: 450px;
+        border-radius: var(--radius-sm);
+    }
+
+    .form-header {
+        padding: 1rem;
+    }
+
+    .form-header .logo {
+        font-size: 1.25rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .form-content {
+        padding: 1rem;
+    }
+
+    .question-screen, .intro-screen, .thank-you-screen {
+        padding: 1rem;
+    }
+
+    h1 {
+        font-size: 1.5rem;
+    }
+
+    .form-group {
+        margin-bottom: 1.25rem;
+    }
+
+    label {
+        font-size: 0.95rem;
+        margin-bottom: 0.5rem;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"],
+    textarea,
+    select {
+        padding: 0.75rem;
+        font-size: 0.9rem;
+    }
+
+    .radio-option, .checkbox-option {
+        padding: 0.875rem;
+    }
+
+    .btn, .cta-button {
+        padding: 0.625rem 1.25rem;
+        font-size: 0.9rem;
+        margin: 0.25rem;
+    }
+
+    .check-animation {
+        width: 60px;
+        height: 60px;
+    }
+}
+
+/* Fix for iOS input zoom */
+@media screen and (-webkit-min-device-pixel-ratio:0) {
+    select,
+    textarea,
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="number"] {
+        font-size: 16px;
+    }
+}
+
+/* Prevent content shift on mobile */
+html {
+    overflow-x: hidden;
+    width: 100%;
+}
+
+/* Smooth scrolling for the entire page */
+html {
+    scroll-behavior: smooth;
+}
+
+/* Prevent pull-to-refresh on mobile */
+body {
+    overscroll-behavior-y: none;
+}
+
+/* --- FULL PAGE FORM LAYOUT FOR JOIN US --- */
+body.join-us-page, .join-us-fullpage {
+    min-height: 100vh;
+    min-width: 100vw;
+    height: 100vh;
+    width: 100vw;
+    display: block;
+    background: var(--bg-medium);
+    overflow-x: hidden;
+}
+
+.form-container {
+    position: absolute;
+    top: 100px;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    margin: auto;
+    width: 100%;
+    max-width: 600px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: var(--bg-medium);
+    box-shadow: none;
+    border-radius: 0;
+    padding: 0 2rem;
+    z-index: 100;
+    overflow: visible;
+}
+
+.form-content {
+    width: 100%;
+    margin: 0;
+    padding: 2rem 1rem;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: transparent;
+    overflow-y: visible;
+    max-height: none;
+}
+
+.form-footer {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 1rem 0 1.5rem 0;
+    background: transparent;
+    margin-bottom: 1rem;
+    position: relative;
+}
+
+.navigation-buttons {
+    display: flex;
+    gap: 1.5rem;
+    justify-content: center;
+    align-items: center;
+    width: 100%;
+}
+
+@media (max-width: 768px) {
+    .form-container {
+        margin: 80px auto 0;
+        min-height: calc(100vh - 80px);
+        padding: 0;
+        max-width: 100%;
+    }
+    
+    .form-content {
+        padding: 1rem;
+    }
+    
+    .nav-links {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100vh;
+        background: var(--bg-dark);
+        display: none;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 1rem;
+    }
+    
+    .nav-links.active {
+        display: flex;
+    }
+    
+    .intro-screen h1 {
+        font-size: 2.2rem;
+    }
+    
+    .intro-screen p {
+        font-size: 1rem;
+    }
+    
+    .menu-toggle {
+        z-index: 1001;
+    }
+}
+
+/* Remove .container rules for join-us page */
+body.join-us-page .main-container { display: none !important; }
+
+/* Additional fixes for join-us page */
+.join-us-page .site-header {
+    background: var(--bg-dark);
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 1000;
+    border-bottom: 1px solid rgba(100, 255, 218, 0.2);
+}
+
+.contact-section .join-us {
+    background-color: var(--accent-color); 
+    color: var(--bg-dark);
+}
+
+.contact-section .join-us:hover {
+    background-color: white;
+    color: var(--accent-color);
+}
+
+.join-us-page .logo a span {
+    color: var(--text-light);
+    transition: color var(--transition-normal);
+}
+
+.join-us-page .logo a:hover span {
+    color: var(--accent-color);
+}
+
+/* Fix form container positioning */
+.join-us-page .form-container {
+    margin-top: 120px;
+    min-height: calc(100vh - 120px);
+    max-width: 600px;
+    margin-left: auto;
+    margin-right: auto;
+    position: relative;
+    padding-bottom: 2rem;
+}
+
+/* Remove scrollbar from main container */
+.join-us-page {
+    overflow-y: auto;
+    height: auto;
+    min-height: 100vh;
+}
+
+/* Mobile menu toggle styles for join-us page */
+.join-us-page .menu-toggle {
+    display: none;
+}
+
+@media (max-width: 768px) {
+    .join-us-page .menu-toggle {
+        display: block;
+        background: none;
+        border: none;
+        cursor: pointer;
+        padding: 0;
+        width: 30px;
+        height: 24px;
+        position: absolute;
+        right: 1.5rem;
+        top: 1.8rem;
+        z-index: 1001;
+        border-radius: 0;
+    }
+
+    .join-us-page .menu-toggle span {
+    display: block;
+    width: 100%;
+    height: 2px;
+    background: var(--text-light);
+    position: absolute;
+    left: 0;
+    transition: all 0.3s ease;
+}
+
+    .join-us-page .menu-toggle span:first-child {
+        top: 0;
+    }
+
+    .join-us-page .menu-toggle span:nth-child(2) {
+        top: 10px;
+    }
+
+    .join-us-page .menu-toggle span:last-child {
+        top: 20px;
+    }
+
+    /* Fix navbar positioning in mobile */
+    .join-us-page .nav-links {
+        padding-top: 80px;
+        z-index: 1000;
+        background: rgba(10, 25, 47, 0.98);
+        backdrop-filter: blur(10px);
+        -webkit-backdrop-filter: blur(10px);
+    }
+    
+    .join-us-page .nav-links li {
+        margin: 0.8rem 0;
+    }
+    
+    .join-us-page .nav-links a {
+        font-size: 1.2rem;
+        padding: 0.8rem;
+        display: block;
+        width: 100%;
+        text-align: center;
+        color: var(--text-light);
+    }
+    
+    .join-us-page .nav-links a:hover {
+        color: var(--accent-color);
+    }
+    
+    .join-us-page .nav-links .cta-button {
+        background: var(--accent-color);
+        color: var(--bg-dark);
+        padding: 0.75rem 1.5rem;
+        border-radius: var(--radius-full);
+        margin-top: 1rem;
+    }
+    
+    /* Fix animation for menu toggle */
+    .join-us-page .menu-toggle.active span:first-child {
+        transform: rotate(45deg);
+        top: 10px;
+        background: var(--accent-color);
+    }
+    
+    .join-us-page .menu-toggle.active span:nth-child(2) {
+        opacity: 0;
+    }
+    
+    .join-us-page .menu-toggle.active span:last-child {
+        transform: rotate(-45deg);
+        top: 10px;
+        background: var(--accent-color);
+    }
+}
+
+@media (max-width: 768px) {
+    .join-us-page .form-container {
+        margin-top: 100px;
+        min-height: calc(100vh - 100px);
+        max-width: 100%;
+        width: 95%;
+    }
+}
+
+/* Fix button styling for consistent hover effects */
+.join-us-page .btn, 
+.join-us-page .cta-button {
+    background-color: var(--accent-color);
+    color: var(--bg-dark);
+    padding: 0.875rem 1.75rem;
+    border-radius: var(--radius-full);
+    font-weight: 600;
+    transition: all var(--transition-normal);
+    box-shadow: 0 2px 8px rgba(100, 255, 218, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.join-us-page .btn:hover, 
+.join-us-page .cta-button:hover {
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(100, 255, 218, 0.15);
+    background: white;
+    color: var(--bg-dark);
+}
+
+.join-us-page .btn.btn-secondary {
+    background: transparent;
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+}
+
+.join-us-page .btn.btn-secondary:hover {
+    background: rgba(100, 255, 218, 0.05);
+    color: var(--accent-color);
+    box-shadow: 0 2px 8px rgba(100, 255, 218, 0.1);
+}
+
+.join-us-page .radio-option.selected,
+.join-us-page .checkbox-option.selected {
+    border-color: var(--accent-color);
+    background: rgba(10, 25, 47, 0.8);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(100, 255, 218, 0.1);
+}
+
+/* Adjust heights to reduce scrolling */
+.join-us-page .form-container {
+    margin-top: 90px;
+    min-height: auto;
+    height: auto;
+    max-height: calc(100vh - 100px);
+    overflow-y: auto;
+    padding-top: 10px;
+}
+
+.join-us-page .question-screen {
+    min-height: auto;
+    padding: 2rem 0;
+}
+
+/* Fix navigation buttons position */
+.join-us-page .form-footer {
+    position: relative;
+    padding: 1rem 0 2rem;
+}
+
+/* Fix radio button selection styles */
+.join-us-page .radio-option input[type="radio"],
+.join-us-page .checkbox-option input[type="checkbox"] {
+    accent-color: var(--accent-color);
+}
+
+/* Fix Let's Begin button hover effect */
+.intro-screen .btn-primary,
+.intro-screen .cta-button {
+    background-color: var(--accent-color);
+    color: var(--bg-dark);
+    transition: all var(--transition-normal);
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(100, 255, 218, 0.15);
+}
+
+.intro-screen .btn-primary:hover,
+.intro-screen .cta-button:hover {
+    background-color: white;
+    color: var(--bg-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(100, 255, 218, 0.15);
+}
+
+/* Prevent scrollbar for dropdown questions */
+.join-us-page .question-screen {
+    overflow: visible;
+    height: auto;
+    max-height: none;
+}
+
+/* Specifically style the dropdown question */
+.question-screen[data-question-id="role"] {
+    min-height: 40vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-start;
+    padding-top: 20px;
+}
+
+.question-screen[data-question-id="role"] select {
+    margin-bottom: 1rem;
+}
+
+/* Make help text more visible */
+.help-text {
+    margin-top: 0.8rem;
+    color: var(--text-light);
+    opacity: 0.8;
+}
+
+.help-text .link {
+    color: var(--accent-color);
+    text-decoration: underline;
+    cursor: pointer;
+}
+
+/* Adjust form container to prevent scrolling */
+.join-us-page .form-container {
+    overflow: visible;
+    max-height: none;
+}
+
+/* Fix hover effects for all homepage buttons */
+.hero-cta .cta-button {
+    background-color: var(--accent-color);
+    color: var(--bg-dark);
+    transition: all var(--transition-normal);
+    transform: translateY(0);
+    box-shadow: 0 2px 8px rgba(100, 255, 218, 0.15);
+    position: relative;
+    overflow: hidden;
+}
+
+.hero-cta .cta-button:hover {
+    background-color: white;
+    color: var(--bg-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 3px 10px rgba(100, 255, 218, 0.15);
+}
+
+.hero-cta .cta-button.secondary {
+    background: transparent;
+    color: var(--accent-color);
+    border: 2px solid var(--accent-color);
+    box-shadow: none;
+}
+
+.hero-cta .cta-button.secondary:hover {
+    background: rgba(100, 255, 218, 0.05);
+    border-color: var(--accent-color);
+    color: var(--accent-color);
+    box-shadow: 0 2px 8px rgba(100, 255, 218, 0.1);
+}
+
+/* Add pulsing highlight for hover state */
+@keyframes pulse-highlight {
+    0% { box-shadow: 0 0 0 0 rgba(100, 255, 218, 0.3); }
+    70% { box-shadow: 0 0 0 6px rgba(100, 255, 218, 0); }
+    100% { box-shadow: 0 0 0 0 rgba(100, 255, 218, 0); }
+}
+
+/* Ensure consistent menu toggle styling for join-us page */
+.join-us-page .menu-toggle,
+.join-us-page .menu-toggle span {
+    border-radius: 0 !important;
+    -webkit-border-radius: 0 !important;
+    -moz-border-radius: 0 !important;
+    box-shadow: none !important;
+    background-clip: padding-box;
 }
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-credit {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-description {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-alt-text {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-source {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-license {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-copyright {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-attribution {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-gallery {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-carousel {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-slider {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-zoom {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-lightbox {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-popup {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-modal {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-link {
-    /* Add your styles here */
-}
-
-.blog-post-content .image-caption {
-} 

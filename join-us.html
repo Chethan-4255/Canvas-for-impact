@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Join Canvas for Impact</title>
+  <link rel="stylesheet" href="style.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600&display=swap">
+    <style>    /* Inline styles for better question layout */    .question-screen {      display: flex;      flex-direction: column;      justify-content: center;      padding: 1.5rem 0;      height: auto;      min-height: 60vh;    }        .radio-group, .checkbox-group {      margin-top: 1.5rem;    }        .radio-option, .checkbox-option {      margin-bottom: 0.8rem;      border: 2px solid var(--accent-color) !important;      box-shadow: 0 0 10px rgba(100,255,218,0.2) !important;    }            /* Permanent highlight for input fields */    input[type="text"],    input[type="email"],    input[type="tel"],    input[type="number"],    textarea,    select {      border: 2px solid var(--accent-color) !important;      box-shadow: 0 0 10px rgba(100,255,218,0.2) !important;    }        .form-footer {      margin-top: auto;    }        /* Fix Let's Begin button styling */    #start-btn {      background-color: var(--accent-color);      color: var(--bg-dark);      padding: 0.875rem 1.75rem;      border-radius: var(--radius-full);      font-weight: 600;      transition: all 0.3s ease;      box-shadow: 0 2px 8px rgba(100, 255, 218, 0.15);      border: none;      cursor: pointer;      min-width: 200px;    }        #start-btn:hover {      background-color: white;      color: var(--bg-dark);      transform: translateY(-1px);      box-shadow: 0 3px 10px rgba(100, 255, 218, 0.15);    }        /* No scrolling for dropdown */    #question-4 select {      padding: 1rem;      font-size: 1rem;      cursor: pointer;      border-radius: var(--radius-md);    }        .help-text {      margin-top: 0.8rem;    }        @media (max-height: 700px) {      .question-screen {        min-height: auto;        padding: 1rem 0;      }            .radio-option, .checkbox-option {        padding: 0.8rem;        margin-bottom: 0.5rem;      }    }  </style>
+</head>
+<body class="join-us-page">
+  <header class="site-header">
+    <div class="container header-container">
+      <div class="logo">
+        <a href="/">
+          <img src="assets/images/logo.png" alt="Canvas for Impact Logo">
+          <span>Canvas for Impact</span>
+        </a>
+      </div>
+      <nav class="main-nav">
+        <button class="menu-toggle" aria-label="Toggle navigation" aria-expanded="false" style="background: transparent; border: none;">
+          <span style="border-radius: 0 !important; height: 3px; background: white;"></span>
+          <span style="border-radius: 0 !important; height: 3px; background: white;"></span>
+          <span style="border-radius: 0 !important; height: 3px; background: white;"></span>
+        </button>
+        <ul class="nav-links">
+          <li><a href="/index.html#home">Home</a></li>
+          <li><a href="/index.html#about">About</a></li>
+          <li><a href="/index.html#methods">Our Work</a></li>
+          <li><a href="/blog.html">Blog</a></li>
+          <li><a href="/index.html#mission">Mission</a></li>
+          <li><a href="join-us.html" class="cta-button">Get Involved</a></li>
+        </ul>
+      </nav>
+    </div>
+  </header>
+  <div class="form-container">
+    <div class="form-header">
+      <div class="logo">Canvas for Impact</div>
+      <div class="progress-container">
+        <div class="progress-bar" id="progress-bar"></div>
+      </div>
+    </div>
+
+    <div class="form-content">
+      <div class="intro-screen active" id="intro">
+        <h1>Join Us!</h1>
+        <p>Thank you for your interest in joining Canvas for Impact! We are a student-run nonprofit dedicated to raising awareness about overlooked issues. Please fill out this form to apply for a role in our team.</p>
+        <button class="btn btn-primary" id="start-btn">Let's Begin</button>
+      </div>
+
+      <form id="application-form">
+        <!-- Question screens will be dynamically generated -->
+      </form>
+
+      <div class="thank-you-screen" id="thank-you">
+        <h1>Thank you for applying!</h1>
+        <p>We'll review your application and contact you within a week regarding the next steps.</p>
+        <div class="check-animation">
+          <svg class="checkmark" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+            <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"/>
+            <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"/>
+          </svg>
+        </div>
+        <a href="index.html" class="btn btn-secondary" style="margin-top: 2rem;">Back to Home</a>
+      </div>
+    </div>
+
+    <div class="form-footer">
+      <div class="navigation-buttons">
+        <button type="button" id="prev-btn" class="btn btn-secondary">Previous</button>
+        <button type="button" id="next-btn" class="btn btn-primary">Next</button>
+        <button type="submit" id="submit-btn" class="btn btn-primary">Submit</button>
+      </div>
+    </div>
+  </div>
+  <script>
+    // Enhanced mobile menu toggle for join-us page
+    document.addEventListener('DOMContentLoaded', function() {
+      const menuToggle = document.querySelector('.menu-toggle');
+      const navLinks = document.querySelector('.nav-links');
+      
+      if (menuToggle && navLinks) {
+        menuToggle.addEventListener('click', function() {
+          const isExpanded = menuToggle.getAttribute('aria-expanded') === 'true';
+          menuToggle.setAttribute('aria-expanded', !isExpanded);
+          menuToggle.classList.toggle('active');
+          navLinks.classList.toggle('active');
+          
+          if (navLinks.classList.contains('active')) {
+            navLinks.style.display = 'flex';
+            document.body.style.overflow = 'hidden';
+          } else {
+            document.body.style.overflow = '';
+            // Delay hiding to allow animation
+            setTimeout(() => {
+              if (!navLinks.classList.contains('active')) {
+                navLinks.style.display = '';
+              }
+            }, 300);
+          }
+        });
+        
+        // Close mobile menu when clicking on links
+        document.querySelectorAll('.nav-links a').forEach(link => {
+          link.addEventListener('click', () => {
+            menuToggle.setAttribute('aria-expanded', 'false');
+            menuToggle.classList.remove('active');
+            navLinks.classList.remove('active');
+            document.body.style.overflow = '';
+          });
+        });
+      }
+    });
+  </script>
+  <script src="script.js"></script>
+</body>
+</html> 
